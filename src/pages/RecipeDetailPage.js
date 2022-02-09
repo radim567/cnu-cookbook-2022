@@ -40,9 +40,7 @@ export function RecipeDetailPage() {
       <Row>
         <Col>
           <h5>Ready in: {recipe.preparationTime} min)</h5>
-
           <h5>Servings: {recipe.servingCount}</h5>
-
           <h5>Ingredients: {recipe.ingredients}</h5>
         </Col>
         <Col>
