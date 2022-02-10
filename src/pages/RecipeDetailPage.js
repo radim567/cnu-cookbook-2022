@@ -11,30 +11,18 @@ export function RecipeDetailPage() {
   useEffect(() => {
     api.get(`/recipes/${slug}`).then((response) => setRecipe(response.data));
   }, [slug]);
-  // console.log(recipe); // delete
-  // recipe props:
-  //  _id
-  //  slug
-  //  title
-  //  preparationTime
-  //  servingCount
-  //  directions string
-  //  ingredients []
-  //  lastModifiedDate
-  //  __v
 
-  //destructure .direction as string
-  let { directions } = recipe;
-  console.log(directions);
-  console.log(typeof directions);
-  let x = 1 + '1';
-  console.log(1 + '1', typeof x);
-
-  // Make line break before every step number " xx. "
-  // Somebody has to take care of that beer Nr. 5, though...
-  /* let structureText = (string) => {
-    return string.replace(/([^ ]\d+\.[ ]$)/g, '</br> $1'); // replace with </br> or \n or \r
-  }; */
+  // Split .directions after every step order number " xx. "
+  let structureText = () => {
+    let { directions } = recipe;
+    let steps = directions.split(/^[ ]\d+[. ]/g);
+    // insert the order numbers at the beginning of the string
+    for (let i = 0; i < steps.length; i++) {
+      let order = i + 1;
+      steps[i] = order + '. ' + steps[i];
+    }
+    return steps.join('\r\n');
+  };
 
   return (
     <Container>
@@ -47,8 +35,7 @@ export function RecipeDetailPage() {
         </Col>
         <Col>
           <h4>Directions:</h4>
-          <p>{directions}</p>
-          <h4>Directions structured:</h4>
+          <p>{structureText(recipe.directions)}</p>
 
           <Button color="info">
             <>Edit</>
@@ -61,3 +48,6 @@ export function RecipeDetailPage() {
     </Container>
   );
 }
+
+//           <h4>Directions structured:</h4>
+//          <p>{structureText(directions)}</p>
