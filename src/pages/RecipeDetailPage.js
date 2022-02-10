@@ -27,12 +27,14 @@ export function RecipeDetailPage() {
   let { directions } = recipe;
   console.log(directions);
   console.log(typeof directions);
+  let x = 1 + '1';
+  console.log(1 + '1', typeof x);
 
   // Make line break before every step number " xx. "
   // Somebody has to take care of that beer Nr. 5, though...
-  let structureText = (string) => {
+  /* let structureText = (string) => {
     return string.replace(/([^ ]\d+\.[ ]$)/g, '</br> $1'); // replace with </br> or \n or \r
-  };
+  }; */
 
   return (
     <Container>
@@ -47,7 +49,7 @@ export function RecipeDetailPage() {
           <h4>Directions:</h4>
           <p>{directions}</p>
           <h4>Directions structured:</h4>
-          <p>{structureText(directions)}</p>
+
           <Button color="info">
             <>Edit</>
           </Button>

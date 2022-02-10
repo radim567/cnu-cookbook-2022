@@ -11,6 +11,7 @@ export function RecipesList({ recipes }) {
               title={recipe.title}
               preparationTime={recipe.preparationTime}
               slug={recipe.slug}
+              id={recipe._id}
             />
           </Col>
         );
