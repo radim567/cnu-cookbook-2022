@@ -14,7 +14,7 @@ export function RecipeCard({ title, preparationTime, slug }) {
       <CardBody>
         <CardTitle>{title}</CardTitle>
         <CardSubtitle>{preparationTime} min</CardSubtitle>
-        <CardSubtitle>({pictureId})</CardSubtitle>
+        <CardSubtitle>({pictureFileName})</CardSubtitle>
       </CardBody>
     </Card>
   );

@@ -36,7 +36,6 @@ export function RecipeDetailPage() {
         <Col>
           <h4>Directions:</h4>
           <p>{structureText(recipe.directions)}</p>
-
           <Button color="info">
             <>Edit</>
           </Button>
