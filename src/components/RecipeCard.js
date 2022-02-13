@@ -1,20 +1,27 @@
 import { Link } from 'react-router-dom';
 import { Card, CardImg, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
-// import placeholder from '../images/food-placeholder.png';
+import clockIcon from '../images/clock-icon-40x40.png';
 
-const picturePath = '../images/meal-pics/';
+const pictureSource = './meal-pics/';
 
 export function RecipeCard({ title, preparationTime, slug }) {
-  let pictureFileName = picturePath + slug + '.jpg';
   return (
-    <Card className="h-100">
+    <Card className="h-100 border-2">
       <Link to={`/recipe/${slug}`}>
-        <CardImg src={pictureFileName} />
+        <CardImg src={pictureSource + slug + '.jpg'} />
       </Link>
-      <CardBody>
-        <CardTitle>{title}</CardTitle>
-        <CardSubtitle>{preparationTime} min</CardSubtitle>
-        <CardSubtitle>({pictureFileName})</CardSubtitle>
+      <CardBody style={{ backgroundColor: '#ddd' }}>
+        <CardTitle className="fw-bold">{title}</CardTitle>
+        <CardSubtitle>
+          <img
+            src={clockIcon}
+            width="20px"
+            height="20px"
+            className="me-1"
+            alt="clock icon"
+          />
+          {preparationTime} min
+        </CardSubtitle>
       </CardBody>
     </Card>
   );
