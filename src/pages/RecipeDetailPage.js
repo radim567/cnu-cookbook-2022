@@ -2,8 +2,9 @@ import { Container, Button, Row, Col } from 'reactstrap';
 import { Card, CardImg } from 'reactstrap';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
+import { RecipeEdit } from './RecipeEditPage';
 import { api } from '../api';
+import { DeleteRecipe } from '../components/EditOps';
 
 import clockIcon from '../images/clock-icon-40x40.png';
 const pictureSource = '/meal-pics/';
@@ -14,16 +15,27 @@ export function RecipeDetailPage() {
   useEffect(() => {
     api.get(`/recipes/${slug}`).then((response) => setRecipe(response.data));
   }, [slug]);
-
   // Structure direction string, remove order numbers
   let { directions } = recipe;
-  console.log(directions); // still ok, directions has a string inside...
-  const orderNr = /^[ ]\d+[. ]/g;
-  const steps = directions.split(orderNr); //throws error: Uncaught TypeError: Cannot read properties of undefined (reading 'split')
-
+  //  console.log(directions); // still ok, directions has a string inside...
+  const orderNr = /^[ ]\d[. ]/g;
+  const steps = directions?.split(orderNr);
+  // console.log(steps);
   return (
     <Container>
-      <h1>{recipe.title}</h1>
+      <Row>
+        <Col>
+          <h1>{recipe.title}</h1>
+        </Col>
+        <Col className="col-2">
+          <Button className="ms-4 me-2" onClick={() => RecipeEdit()}>
+            <>Edit</>
+          </Button>
+          <Button style={{ backgroundColor: '#d4161d' }} onClick={DeleteRecipe}>
+            <>Delete</>
+          </Button>
+        </Col>
+      </Row>
       <Row>
         <Col className="col-5">
           <Card className="mb-3">
@@ -47,18 +59,13 @@ export function RecipeDetailPage() {
           <h5>Ingredients: {recipe.ingredients}</h5>
         </Col>
         <Col>
-          <h4>Directions:</h4>
+          <h4 className="ms-4">Directions:</h4>
+          <hr />
           <ol>
-            {steps.map((item) => (
-              <li>{item}</li>
+            {steps?.map((item) => (
+              <li key="{item}">{item}</li>
             ))}
           </ol>
-          <Button color="info">
-            <>Edit</>
-          </Button>
-          <Button color="warning">
-            <>Delete</>
-          </Button>
         </Col>
       </Row>
     </Container>

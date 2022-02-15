@@ -9,17 +9,3 @@ export function SearchInput({ setValue, ...rest }) {
     />
   );
 }
-
-/*
-  return (
-    <div>
-      <Input
-        placeholder="Vyhledat recept..."
-        value={value}
-        onChange={(event) => setValue(event.target.value)}
-      />
-      <p>Hodnota: {value}</p>
-    </div>
-  );
-}
-*/
