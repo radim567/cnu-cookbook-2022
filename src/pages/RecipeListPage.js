@@ -3,9 +3,8 @@ import { useState, useEffect } from 'react';
 
 import { RecipesList } from '../components/RecipesList';
 import { SearchInput } from '../components/SearchInput';
-// import { CreateRecipe } from '../components/EditOps';
 import { api } from '../api';
-import { RecipeEdit } from './RecipeEditPage';
+import { Link } from 'react-router-dom';
 
 export function RecipeListPage() {
   const [filter, setFilter] = useState('');
@@ -37,9 +36,14 @@ export function RecipeListPage() {
           <h1>Recepty</h1>
         </Col>
         <Col className="col-1">
-          <Button style={{ backgroundColor: '#01aa5d' }} onClick={RecipeEdit}>
-            New
-          </Button>
+          <Link to={`/recipe/new`}>
+            <Button
+              style={{ backgroundColor: '#01aa5d' }}
+              className="ms-4 me-2"
+            >
+              <>New</>
+            </Button>
+          </Link>
         </Col>
       </Row>
       <SearchInput

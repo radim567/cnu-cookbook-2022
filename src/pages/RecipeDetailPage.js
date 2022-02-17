@@ -2,9 +2,9 @@ import { Container, Button, Row, Col } from 'reactstrap';
 import { Card, CardImg } from 'reactstrap';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { RecipeEdit } from './RecipeEditPage';
 import { api } from '../api';
 import clockIcon from '../images/clock-icon-40x40.png';
+import { Link } from 'react-router-dom';
 
 const pictureSource = '/meal-pics/';
 
@@ -32,11 +32,25 @@ export function RecipeDetailPage() {
         <Col>
           <h1>{recipe.title}</h1>
         </Col>
-        <Col className="col-2">
-          <Button className="ms-4 me-2" onClick={RecipeEdit(recipe)}>
-            <>Edit</>
-          </Button>
-          <Button style={{ backgroundColor: '#d4161d' }} onClick={DeleteRecipe}>
+        <Col className="col-3">
+          <Link to={`/recipe/new`}>
+            <Button className="me-2  mb-1">
+              <>New</>
+            </Button>
+          </Link>
+          <Link to={`/recipe/${slug}/edit`}>
+            <Button
+              style={{ backgroundColor: '#01aa5d' }}
+              className="me-2 mb-1"
+            >
+              <>Edit</>
+            </Button>
+          </Link>
+          <Button
+            style={{ backgroundColor: '#d4161d' }}
+            className="mb-1"
+            onClick={DeleteRecipe}
+          >
             <>Delete</>
           </Button>
         </Col>
