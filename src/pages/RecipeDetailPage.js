@@ -4,9 +4,8 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { RecipeEdit } from './RecipeEditPage';
 import { api } from '../api';
-import { DeleteRecipe } from '../components/EditOps';
-
 import clockIcon from '../images/clock-icon-40x40.png';
+
 const pictureSource = '/meal-pics/';
 
 export function RecipeDetailPage() {
@@ -15,12 +14,18 @@ export function RecipeDetailPage() {
   useEffect(() => {
     api.get(`/recipes/${slug}`).then((response) => setRecipe(response.data));
   }, [slug]);
+
+  function DeleteRecipe() {
+    api.delete(`/recipes/${slug}`).then(() => {
+      alert('Recipe deleted!');
+      setRecipe(null);
+    });
+  }
   // Structure direction string, remove order numbers
   let { directions } = recipe;
-  //  console.log(directions); // still ok, directions has a string inside...
   const orderNr = /^[ ]\d[. ]/g;
   const steps = directions?.split(orderNr);
-  // console.log(steps);
+
   return (
     <Container>
       <Row>
@@ -28,7 +33,7 @@ export function RecipeDetailPage() {
           <h1>{recipe.title}</h1>
         </Col>
         <Col className="col-2">
-          <Button className="ms-4 me-2" onClick={() => RecipeEdit()}>
+          <Button className="ms-4 me-2" onClick={RecipeEdit(recipe)}>
             <>Edit</>
           </Button>
           <Button style={{ backgroundColor: '#d4161d' }} onClick={DeleteRecipe}>
