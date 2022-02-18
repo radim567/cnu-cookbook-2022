@@ -21,6 +21,7 @@ export function RecipeDetailPage() {
       setRecipe(null);
     });
   }
+
   // Structure direction string, remove order numbers
   let { directions } = recipe;
   const orderNr = /^[ ]\d[. ]/g;

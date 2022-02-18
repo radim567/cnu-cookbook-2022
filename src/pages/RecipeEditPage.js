@@ -1,11 +1,11 @@
 import { Container, FormGroup, InputGroup, InputGroupText } from 'reactstrap';
 import { Label, Input, Button, Row, Col } from 'reactstrap';
 import { api } from '../api';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import {
   IoTimerOutline,
-  IoPeople,
+  IoPeopleOutline,
   IoAddCircleOutline,
   IoScaleOutline,
   IoRestaurantOutline,
@@ -19,16 +19,29 @@ let stylingIcon = {
   fontSize: '1.5rem',
 };
 
-export function RecipeEditPage(recipeprops) {
-  const [recipe, setRecipe] = useState({ recipeprops });
+export function RecipeEditPage() {
+  const { slug } = useParams();
+  const [recipe, setRecipe] = useState({});
+
+  /* const [error, setError] = useState(null);
+
+      .catch((error) => {
+        setError(error);
+      });
+  });
+  if (error) return `Error: ${error.message}`; */
+
+  useEffect(() => {
+    api.get(`/recipes/${slug}`).then((response) => setRecipe(response.data));
+  }, [slug]);
 
   const handleOnChange = (event) => {
     const { name, value } = event.target;
     setRecipe({ ...recipe, [name]: value });
   };
 
-  function updateRecipe() {
-    api.put(`/recipes/${recipe.slug}`, { recipe }).then((response) => {
+  function UpdateRecipe() {
+    api.put(`/recipes/${slug}`, recipe).then((response) => {
       setRecipe(response.data);
     });
   }
@@ -46,7 +59,7 @@ export function RecipeEditPage(recipeprops) {
             <Button
               style={{ backgroundColor: '#039ed8' }}
               className="me-2 mb-1"
-              onClick={updateRecipe}
+              onClick={UpdateRecipe}
             >
               Save
             </Button>
@@ -83,7 +96,7 @@ export function RecipeEditPage(recipeprops) {
             </FormGroup>
             <FormGroup>
               <Label for="servings">
-                <IoPeople style={stylingIcon} />
+                <IoPeopleOutline style={stylingIcon} />
                 Počet porcí
               </Label>
               <Input
