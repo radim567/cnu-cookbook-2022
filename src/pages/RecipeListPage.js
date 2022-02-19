@@ -43,7 +43,7 @@ export function RecipeListPage() {
               style={{ backgroundColor: '#01aa5d' }}
               className="ms-4 me-2"
             >
-              <>New</>
+              New
             </Button>
           </Link>
         </Col>

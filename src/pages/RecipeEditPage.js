@@ -11,6 +11,7 @@ import {
   IoRestaurantOutline,
   IoBasketOutline,
   IoAlbumsOutline,
+  IoImageOutline,
 } from 'react-icons/io5';
 
 let stylingIcon = {
@@ -32,7 +33,9 @@ export function RecipeEditPage() {
   if (error) return `Error: ${error.message}`; */
 
   useEffect(() => {
-    api.get(`/recipes/${slug}`).then((response) => setRecipe(response.data));
+    if (slug) {
+      api.get(`/recipes/${slug}`).then((response) => setRecipe(response.data));
+    }
   }, [slug]);
 
   const handleOnChange = (event) => {
@@ -41,9 +44,17 @@ export function RecipeEditPage() {
   };
 
   function UpdateRecipe() {
-    api.post(`/recipes/${slug}`, recipe).then((response) => {
-      setRecipe(response.data);
-    });
+    if (slug) {
+      // if slug present, update recipe
+      api.post(`/recipes/${slug}`, recipe).then((response) => {
+        setRecipe(response.data);
+      });
+    } else {
+      // if not, create new
+      api.post(`/recipes/`, recipe).then((response) => {
+        setRecipe(response.data);
+      });
+    }
   }
   return (
     <Container>
@@ -116,11 +127,17 @@ export function RecipeEditPage() {
               </Label>
               <Input
                 id="sideDish"
-                name="sidedish"
-                value={recipe.sidedish}
-                placeholder={recipe.sidedish}
+                name="sideDish"
+                value={recipe.sideDish}
+                placeholder={recipe.sideDish}
                 onChange={handleOnChange}
               />
+            </FormGroup>
+            <FormGroup>
+              <Label for="pictureFile">
+                <IoImageOutline style={stylingIcon} /> Obrázek
+              </Label>
+              <Input id="pictureFile" name="file" type="file" />
             </FormGroup>
           </Col>
           <Col className="col-4">

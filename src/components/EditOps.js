@@ -12,7 +12,7 @@ function CreateRecipe() {
 
 // UPDATE recipe
 function UpdateRecipe() {
-  api.put(`/recipes`, { recipes }).then((response) => {
+  api.post(`/recipes`, { recipes }).then((response) => {
     setRecipes(response.data);
   });
 }

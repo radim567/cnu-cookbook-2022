@@ -26,8 +26,11 @@ export function RecipeDetailPage() {
 
   // Structure direction string, remove order numbers
   let { directions } = recipe;
-  const orderNr = /^[ ]\d[. ]/g;
-  const steps = directions?.split(orderNr);
+  const orderNr = /^(\d+\. )/g;
+  let steps = directions?.split('\n');
+  steps = steps?.map((item) => {
+    return item.replace(orderNr, '');
+  });
 
   return (
     <Container>
@@ -36,11 +39,6 @@ export function RecipeDetailPage() {
           <h1>{recipe.title}</h1>
         </Col>
         <Col className="col-3">
-          <Link to={`/recipe/new`}>
-            <Button className="me-2  mb-1">
-              <>New</>
-            </Button>
-          </Link>
           <Link to={`/recipe/${slug}/edit`}>
             <Button
               style={{ backgroundColor: '#01aa5d' }}
@@ -83,8 +81,8 @@ export function RecipeDetailPage() {
           <h4 className="ms-4">Directions:</h4>
           <hr />
           <ol>
-            {steps?.map((item) => (
-              <li key="{item}">{item}</li>
+            {steps?.map((item, index) => (
+              <li key={index}>{item}</li>
             ))}
           </ol>
         </Col>
