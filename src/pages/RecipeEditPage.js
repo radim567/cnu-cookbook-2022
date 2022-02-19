@@ -81,8 +81,8 @@ export function RecipeEditPage() {
         </Row>
         <Row className="mb-3">
           <Input
-            id="titel"
-            name="titel"
+            id="title"
+            name="title"
             value={recipe.title}
             placeholder={recipe.title}
             onChange={handleOnChange}
