@@ -99,7 +99,7 @@ export function RecipeEditPage() {
               <InputGroup>
                 <Input
                   id="preparationTime"
-                  name="time"
+                  name="preparationTime"
                   value={recipe.preparationTime}
                   placeholder={recipe.preparationTime}
                   onChange={handleOnChange}
@@ -108,15 +108,15 @@ export function RecipeEditPage() {
               </InputGroup>
             </FormGroup>
             <FormGroup>
-              <Label for="servings">
+              <Label for="servingCount">
                 <IoPeopleOutline style={stylingIcon} />
                 Počet porcí
               </Label>
               <Input
-                id="servings"
-                name="servings"
-                value={recipe.servings}
-                placeholder={recipe.servings}
+                id="servingCount"
+                name="servingCount"
+                value={recipe.servingCount}
+                placeholder={recipe.servingCount}
                 onChange={handleOnChange}
               />
             </FormGroup>
