@@ -16,6 +16,8 @@ export function RecipeListPage() {
     // return recipe.title.includes(filter); - nenajde s malym
   });
 
+  console.log(recipes);
+
   useEffect(() => {
     api
       .get(`/recipes`)

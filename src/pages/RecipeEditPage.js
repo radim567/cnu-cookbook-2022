@@ -41,7 +41,7 @@ export function RecipeEditPage() {
   };
 
   function UpdateRecipe() {
-    api.put(`/recipes/${slug}`, recipe).then((response) => {
+    api.post(`/recipes/${slug}`, recipe).then((response) => {
       setRecipe(response.data);
     });
   }
@@ -72,6 +72,7 @@ export function RecipeEditPage() {
           <Input
             id="titel"
             name="titel"
+            value={recipe.title}
             placeholder={recipe.title}
             onChange={handleOnChange}
           />
@@ -88,6 +89,7 @@ export function RecipeEditPage() {
                 <Input
                   id="preparationTime"
                   name="time"
+                  value={recipe.preparationTime}
                   placeholder={recipe.preparationTime}
                   onChange={handleOnChange}
                 />
@@ -102,6 +104,7 @@ export function RecipeEditPage() {
               <Input
                 id="servings"
                 name="servings"
+                value={recipe.servings}
                 placeholder={recipe.servings}
                 onChange={handleOnChange}
               />
@@ -114,6 +117,7 @@ export function RecipeEditPage() {
               <Input
                 id="sideDish"
                 name="sidedish"
+                value={recipe.sidedish}
                 placeholder={recipe.sidedish}
                 onChange={handleOnChange}
               />
@@ -172,6 +176,7 @@ export function RecipeEditPage() {
               <Input
                 id="directions"
                 name="directions"
+                value={recipe.directions}
                 type="textarea"
                 placeholder={recipe.directions}
                 onChange={handleOnChange}

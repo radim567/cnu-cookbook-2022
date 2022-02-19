@@ -22,6 +22,8 @@ export function RecipeDetailPage() {
     });
   }
 
+  console.log(recipe);
+
   // Structure direction string, remove order numbers
   let { directions } = recipe;
   const orderNr = /^[ ]\d[. ]/g;
@@ -76,7 +78,6 @@ export function RecipeDetailPage() {
             {recipe.preparationTime} min
           </h5>
           <h5>Servings: {recipe.servingCount}</h5>
-          <h5>Ingredients: {recipe.ingredients}</h5>
         </Col>
         <Col>
           <h4 className="ms-4">Directions:</h4>
