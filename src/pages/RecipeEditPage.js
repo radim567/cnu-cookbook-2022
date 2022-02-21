@@ -46,7 +46,7 @@ export function RecipeEditPage() {
   function UpdateRecipe() {
     if (slug) {
       // if slug present, update recipe
-      api.post(`/recipes/${slug}`, recipe).then((response) => {
+      api.post(`/recipes/${recipe._id}`, recipe).then((response) => {
         setRecipe(response.data);
       });
     } else {
@@ -61,12 +61,12 @@ export function RecipeEditPage() {
       <form>
         <Row className="mb-2">
           <Col>
-            <h1>
+            <h2>
               <IoRestaurantOutline style={stylingIcon} />
               {recipe.title}
-            </h1>
+            </h2>
           </Col>
-          <Col className="col-3">
+          <Col className="col-3" lg={3} md={4} sm={5} xs={12}>
             <Button
               style={{ backgroundColor: '#039ed8' }}
               className="me-2 mb-1"
@@ -90,7 +90,7 @@ export function RecipeEditPage() {
         </Row>
         <Row style={{ fontSize: '1.3rem' }}>
           <Col className="col-3">
-            <h2>Základní údaje</h2>
+            <h3>Základní údaje</h3>
             <FormGroup>
               <Label for="preparationTime">
                 <IoTimerOutline style={stylingIcon} />
@@ -141,17 +141,30 @@ export function RecipeEditPage() {
             </FormGroup>
           </Col>
           <Col className="col-4">
-            <h2>Ingredience</h2>
+            <h3>Ingredience</h3>
             <Row>
               <Col>
                 <FormGroup>
-                  <Label for="ingredAmount">
+                  <Label for="amount">
                     <IoBasketOutline style={stylingIcon} />
                     Přidat ingredienci
                   </Label>
+                </FormGroup>
+              </Col>
+              <Col>
+                <FormGroup>
+                  <Label for="amountUnit">
+                    <IoScaleOutline style={stylingIcon} />
+                  </Label>
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <FormGroup>
                   <Input
-                    id="ingredAmount"
-                    name="ingredAmount"
+                    id="amount"
+                    name="ingredients.amount"
                     placeholder="Množství"
                     onChange={handleOnChange}
                   />
@@ -159,12 +172,9 @@ export function RecipeEditPage() {
               </Col>
               <Col>
                 <FormGroup>
-                  <Label for="ingredUnit">
-                    <IoScaleOutline style={stylingIcon} />
-                  </Label>
                   <Input
-                    id="ingredUnit"
-                    name="ingredUnit"
+                    id="amountUnit"
+                    name="ingredients.amountUnit"
                     placeholder="Jednotka"
                     onChange={handleOnChange}
                   />
@@ -172,15 +182,27 @@ export function RecipeEditPage() {
               </Col>
             </Row>
             <Row>
-              {' '}
+              <Col>
+                <InputGroup>
+                  <Input
+                    id="name"
+                    name="ingredients.name"
+                    placeholder="Název"
+                    onChange={handleOnChange}
+                  />
+                  <InputGroupText>+</InputGroupText>
+                </InputGroup>
+              </Col>
+            </Row>
+            <Row>
               <FormGroup>
-                <Label for="group">
+                <Label for="isGroup">
                   <IoAlbumsOutline style={stylingIcon} />
                   Přidat skupinu
                 </Label>
                 <Input
-                  id="group"
-                  name="group"
+                  id="isGroup"
+                  name="isGroup"
                   placeholder="Nová skupina"
                   onChange={handleOnChange}
                 />
@@ -188,9 +210,10 @@ export function RecipeEditPage() {
             </Row>
           </Col>
           <Col className="col-5">
-            <h2>Postup</h2>
+            <h3>Postup</h3>
             <FormGroup>
               <Input
+                rows={14}
                 id="directions"
                 name="directions"
                 value={recipe.directions}

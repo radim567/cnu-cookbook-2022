@@ -2,9 +2,11 @@ import { Navbar, Container, NavbarBrand } from 'reactstrap';
 
 export function Header() {
   return (
-    <Navbar color="dark" dark>
+    <Navbar color="warning">
       <Container>
-        <NavbarBrand href="/">Cookbook</NavbarBrand>
+        <NavbarBrand className="font-link ms-3" href="/">
+          COOKBOOK
+        </NavbarBrand>
       </Container>
     </Navbar>
   );

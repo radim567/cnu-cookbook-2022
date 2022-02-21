@@ -35,12 +35,12 @@ export function RecipeListPage() {
     <Container>
       <Row>
         <Col>
-          <h1>Recepty</h1>
+          <h2>Recepty</h2>
         </Col>
         <Col className="col-1">
           <Link to={`/recipe/new`}>
             <Button
-              style={{ backgroundColor: '#01aa5d' }}
+              style={{ backgroundColor: '#039ed8' }}
               className="ms-4 me-2"
             >
               New
